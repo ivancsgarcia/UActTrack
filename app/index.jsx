@@ -4,17 +4,12 @@ import React from 'react';
 
 export default function Index() {
 
-  const [text, setText] = React.useState("")
-  const [password, setPassword] = React.useState("")
-
   return (
     <View style={styles.container}>
-      <Text>Email</Text>
-      <TextInput style={styles.input} placeholder="Enter email" onChangeText={setText} value={text} keyboardType="email-address" />
-      <Text>Password</Text>
-      <TextInput style={styles.input} placeholder="Enter password" onChangeText={setPassword} value={password} secureTextEntry="true"/>
-      <Button style={styles} title="Log In" />
-      <Link href="/registration"><Button style={styles} title="Register Now" /></Link>
+      <Text>Welcome!</Text>
+      <Link href="(auth)/sign-in"><Button style={styles} title="Sign In" /></Link>
+      <Text>Or</Text>
+      <Link href="(auth)/sign-up"><Button style={styles} title="Sign Up" /></Link>
     </View>
   );
 }
