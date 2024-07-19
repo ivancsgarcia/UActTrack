@@ -3,13 +3,13 @@ const mysql = require('mysql2')
 const cors = require('cors')
 
 const app = express()
-
+app.use(express.json())
 app.use(cors())
 
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: '',
     database: 'db_uacttrack'
 })
 
@@ -18,8 +18,8 @@ const db = mysql.createConnection({
 //     console.log("Connected!");
 //   });
 
-  app.get('/', (req, res) => {
-    return res.json("from database");
+app.get('/', (req, res) => {
+    return res.json("Try API, Working.");
 })
 
 app.get('/users', (req, res) => {
@@ -30,6 +30,20 @@ app.get('/users', (req, res) => {
     })
 })
 
-app.listen(8081, () => {
+app.post('/create', (req, res) => {
+    const sql = " INSERT INTO users (`email`, `password`) VALUES (?)"
+    const values = [
+        req.body.email,
+        req.body.password
+    ]
+    db.query(sql, [values], (err, data) => {
+        if(err) return res.json('Error');
+        return res.json(data);
+    })
+})
+
+const port = 8081
+
+app.listen(port, () => {
     console.log("listening to port 8081");
 })
